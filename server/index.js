@@ -22,6 +22,7 @@ connectDB();
 
 const app = express();
 const server = http.createServer(app);
+const helmet = require("helmet");
 
 const allowedOrigins = [
     "http://localhost:3000",
@@ -40,6 +41,8 @@ const io = socketIO(server, {
     transports: ["websocket", "polling"]
 });
 app.set("io", io);
+
+app.use(helmet());
 /* ==========================================
    Global Middlewares
 ========================================== */
