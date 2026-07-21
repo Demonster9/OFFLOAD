@@ -7,7 +7,7 @@ export default function Home() {
 
     const navigate = useNavigate();
 
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
 
     return (
         <>

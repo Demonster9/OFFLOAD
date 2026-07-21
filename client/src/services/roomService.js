@@ -20,9 +20,16 @@ const closeRoom = async (roomId) => {
     return response.data;
 };
 
-export default {
+const roomService = {
+
     joinRoom,
+
     getRoom,
+
     leaveRoom,
+
     closeRoom
+
 };
+
+export default roomService;

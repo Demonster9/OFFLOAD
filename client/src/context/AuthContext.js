@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
 import authService from "../services/authService";
 
@@ -10,42 +10,42 @@ export const AuthProvider = ({ children }) => {
 
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+   useEffect(() => {
 
-        checkAuthentication();
+    checkAuthentication();
 
-    }, []);
+}, [checkAuthentication]);
 
-    const checkAuthentication = async () => {
+    const checkAuthentication = useCallback(async () => {
 
-        try {
+    try {
 
-            const token = localStorage.getItem("offload_token");
+        const token = localStorage.getItem("offload_token");
 
-            if (!token) {
-                setLoading(false);
-                return;
-            }
-
-            const response = await authService.getCurrentUser();
-
-            if (response.success) {
-                setUser(response.user);
-            } else {
-                logout();
-            }
-
-        } catch (error) {
-
-            logout();
-
-        } finally {
-
+        if (!token) {
             setLoading(false);
-
+            return;
         }
 
-    };
+        const response = await authService.getCurrentUser();
+
+        if (response.success) {
+            setUser(response.user);
+        } else {
+            logout();
+        }
+
+    } catch (error) {
+
+        logout();
+
+    } finally {
+
+        setLoading(false);
+
+    }
+
+}, []);
 
     const register = async (formData) => {
 

@@ -1,9 +1,17 @@
 import api from "./api";
 
+const getProfile = async () => {
+
+    const response = await api.get("/profile");
+
+    return response.data;
+
+};
+
 const updateProfile = async (data) => {
 
     const response = await api.put(
-        "/auth/profile",
+        "/profile",
         data
     );
 
@@ -11,8 +19,12 @@ const updateProfile = async (data) => {
 
 };
 
-export default {
+const profileService = {
+
+    getProfile,
 
     updateProfile
 
 };
+
+export default profileService;

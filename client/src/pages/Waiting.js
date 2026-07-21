@@ -12,7 +12,7 @@ import SearchingAnimation from "../components/SearchingAnimation";
 import ParticipantCard from "../components/ParticipantCard";
 import Countdown from "../components/Countdown";
 import ProgressDots from "../components/ProgressDots";
-import Navbar from "../components/profile/Navbar";
+
 
 export default function Waiting() {
 

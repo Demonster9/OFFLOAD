@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { useAuth } from "../context/AuthContext";
 import "../styles/Profile.css";
 import Navbar from "../components/profile/Navbar";
@@ -8,7 +8,7 @@ import profileService from "../services/profileService";
 
 export default function Profile() {
 
-    const navigate = useNavigate();
+    
     const { user, updateUser } = useAuth();
     const [editing, setEditing] = useState(false);
 
