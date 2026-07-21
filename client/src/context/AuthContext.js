@@ -10,11 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const [loading, setLoading] = useState(true);
 
-   useEffect(() => {
-
-    checkAuthentication();
-
-}, [checkAuthentication]);
+  
 
     const checkAuthentication = useCallback(async () => {
 
@@ -46,6 +42,12 @@ export const AuthProvider = ({ children }) => {
     }
 
 }, []);
+
+ useEffect(() => {
+
+    checkAuthentication();
+
+}, [checkAuthentication]);
 
     const register = async (formData) => {
 
