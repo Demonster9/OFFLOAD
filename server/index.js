@@ -23,14 +23,17 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 
-
+const allowedOrigins = [
+    "http://localhost:3000",
+    process.env.CLIENT_URL
+];
 /* ==========================================
    Socket.IO Configuration
 ========================================== */
 
 const io = socketIO(server, {
     cors: {
-        origin: process.env.CLIENT_URL,
+        origin: allowedOrigins,
         methods: ["GET", "POST"],
         credentials: true
     },
@@ -43,7 +46,15 @@ app.set("io", io);
 
 app.use(
     cors({
-        origin: process.env.CLIENT_URL,
+        origin: function (origin, callback) {
+
+            if (!origin || allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+
+            callback(new Error("Not allowed by CORS"));
+
+        },
         credentials: true
     })
 );
@@ -97,7 +108,7 @@ app.get("/", (req, res) => {
 /* ==========================================
    404 Handler
 ========================================== */
-app.use("/api/auth", authRoutes);
+
 app.use((req, res) => {
     res.status(404).json({
         success: false,
