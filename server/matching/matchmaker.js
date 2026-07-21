@@ -46,58 +46,45 @@ const getVentListenBalance = (participants) => {
 const findOrCreateRoom = async (user) => {
   try {
     // Look for an existing waiting room that fits this user
-    const waitingRooms = await Room.find({ status: 'waiting' });
+    // Look for the oldest waiting room
+const waitingRooms = await Room.find({
+  status: "waiting",
+  startedAt: null
+}).sort({ createdAt: 1 });
 
-    for (const room of waitingRooms) {
-      const participants = room.participants;
+for (const room of waitingRooms) {
 
-      // Skip if room is full
-      if (participants.length >= room.maxParticipants) continue;
+  // Skip if room is already full
+  if (room.participants.length >= room.maxParticipants) {
+    continue;
+  }
 
-      // Check level compatibility with all participants
-      const levelOk = participants.every(p =>
-        isWithinOneTier(user.level, p.level)
-      );
-      if (!levelOk) continue;
+    // Skip if room countdown finished and room already started
+  if (room.startedAt) {
+    continue;
+  }
 
-      // Check cooldowns — don't put same two people together twice in a week
-      const cooldownOk = participants.every(p =>
-        !isOnCooldown(user, p.userId)
-      );
-      if (!cooldownOk) continue;
+  // Add user to this waiting room
+  room.participants.push({
+    userId: user._id,
+    handle: user.handle,
+    level: user.level,
+    stack: user.stack,
+    intent: user.intent,
+    joinedAt: new Date()
+  });
 
-      // Check vent/listen balance
-      const { venters, listeners } = getVentListenBalance(participants);
-      if (user.intent === 'vent' && venters >= 4) continue;
-      if (user.intent === 'listen' && listeners >= 3) continue;
+  // Only start immediately if room becomes full (6/6)
+  // Otherwise, let roomSocket.js handle the 2-minute countdown.
+  if (room.participants.length >= room.maxParticipants) {
+    room.status = "active";
+    room.startedAt = new Date();
+  }
 
-      // This room works — add the user
-      room.participants.push({
-        userId: user._id,
-        handle: user.handle,
-        level: user.level,
-        stack: user.stack,
-        intent: user.intent,
-        joinedAt: new Date()
-      });
+  await room.save();
 
-      
-   // If room is now full, activate it
-      if (room.participants.length >= room.maxParticipants) {
-        room.status = 'active';
-        room.startedAt = new Date();
-      }
-      // If minimum 2 people and room has been waiting 2+ minutes, activate anyway
-      const waitTime = new Date() - room.createdAt;
-      if (room.participants.length >= 2 && waitTime > 2 * 60 * 1000) {
-        room.status = 'active';
-        room.startedAt = new Date();
-      }
-
-      await room.save();
-      return room;
-    }
-
+  return room;
+}
     // No suitable room found — create a new one
     let roomNumber = generateRoomNumber();
     let exists = await Room.findOne({ roomNumber });
