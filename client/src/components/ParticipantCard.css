@@ -1,0 +1,31 @@
+.participant-card{
+
+    width:80px;
+
+    height:80px;
+
+    border-radius:18px;
+
+    background:#17171b;
+
+    border:1px solid #2d2d35;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    transition:.3s;
+
+}
+
+.participant-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#6366f1;
+
+}

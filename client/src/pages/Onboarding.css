@@ -1,0 +1,274 @@
+/* ==========================================
+   OFFLOAD - Onboarding
+   Uses the SAME master :root tokens as every other page (see home.css).
+   No local :root here anymore — was previously its own indigo/purple
+   theme (--primary: #6366f1, bg: #09090b), now fully remapped onto the
+   shared orange-accent dark theme.
+========================================== */
+
+/* ==========================================
+   Page
+========================================== */
+
+.onboarding-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background:
+    radial-gradient(circle at top left, var(--accent-glow) 0%, transparent 30%),
+    radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.08) 0%, transparent 30%),
+    var(--bg-page);
+}
+
+/* ==========================================
+   Card
+========================================== */
+
+.onboarding-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 42px;
+  box-shadow: var(--shadow-card-lg);
+}
+
+/* ==========================================
+   Brand
+========================================== */
+
+.brand {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.brand h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 40px;
+  letter-spacing: 3px;
+  font-weight: 800;
+}
+
+.brand p {
+  margin-top: 10px;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+/* ==========================================
+   Github Button
+========================================== */
+
+.github-button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    width:100%;
+
+    padding:16px;
+
+    border:1px solid #374151;
+
+    border-radius:14px;
+
+    background:#111827;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.github-button:hover{
+
+    border-color:#F59E0B;
+
+    transform:translateY(-2px);
+
+}
+
+.github-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   Divider
+========================================== */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 30px 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-default);
+}
+
+/* ==========================================
+   Step
+========================================== */
+
+.step-indicator {
+  color: var(--accent);
+  font-size: 14px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.question {
+  margin: 0 0 28px;
+  color: var(--text-primary);
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* ==========================================
+   Options
+========================================== */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.option {
+  width: 100%;
+  border: 1px solid var(--border-default);
+  background: var(--bg-card-alt);
+  color: var(--text-primary);
+  padding: 18px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: var(--transition-base);
+  font-size: 16px;
+}
+
+.option:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.radio {
+  width: 24px;
+  text-align: center;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* ==========================================
+   Progress
+========================================== */
+
+.progress {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 35px 0;
+}
+
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-hover);
+}
+
+.progress-dot.active {
+  background: var(--accent);
+}
+
+/* ==========================================
+   Continue Button
+========================================== */
+
+.continue-button {
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: var(--accent);
+  color: var(--accent-text-on);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.continue-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.continue-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================
+   Error
+========================================== */
+
+.error-message {
+  margin-top: 18px;
+  color: var(--danger);
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 768px) {
+  .onboarding-card {
+    padding: 28px;
+  }
+
+  .brand h1 {
+    font-size: 32px;
+  }
+
+  .question {
+    font-size: 24px;
+  }
+
+  .option {
+    font-size: 15px;
+  }
+}

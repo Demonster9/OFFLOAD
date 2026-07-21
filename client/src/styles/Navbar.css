@@ -1,0 +1,119 @@
+/* ==========================
+   Navbar
+========================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-default);
+}
+
+/* ==========================
+   Logo
+========================== */
+
+.navbar-logo {
+  color: var(--accent);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  user-select: none;
+}
+
+/* ==========================
+   Links
+========================== */
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: var(--text-tertiary);
+  font-size: 15px;
+  font-weight: 500;
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.navbar-links a:hover {
+  color: var(--accent);
+}
+
+/* underline animation */
+
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: var(--transition-base);
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+.active {
+  color: var(--accent) !important;
+  font-weight: 700;
+}
+
+.active::after {
+  width: 100%;
+}
+
+/* ==========================
+   Logout
+========================== */
+
+.logout-btn {
+  background: var(--accent);
+  color: var(--accent-text-on);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.logout-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   Mobile
+========================== */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .navbar-logo {
+    font-size: 24px;
+  }
+
+  .navbar-links {
+    gap: 20px;
+  }
+
+  .logout-btn {
+    padding: 8px 16px;
+  }
+}
