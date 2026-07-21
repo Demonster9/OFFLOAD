@@ -46,6 +46,7 @@ module.exports = (io, socket) => {
 
                 socket.roomId = roomId;
                 socket.handle = handle;
+                await new Promise(resolve => setTimeout(resolve, 100));
 
                 console.log(
                     `[ROOM] ${handle} joined ${room.roomNumber}`
@@ -222,7 +223,12 @@ module.exports = (io, socket) => {
                             console.log(
                                 `[ROOM] Started : ${freshRoom.roomNumber}`
                             );
-
+console.log(
+    "ROOM START (Countdown)",
+    freshRoom.roomNumber,
+    "Socket Count:",
+    io.sockets.adapter.rooms.get(roomId)?.size
+);
                             io.to(roomId).emit(
                                 "room_started",
                                 {
@@ -332,7 +338,12 @@ module.exports = (io, socket) => {
                     console.log(
                         `[ROOM] Full Room Started : ${room.roomNumber}`
                     );
-
+console.log(
+    "ROOM START (Full)",
+    room.roomNumber,
+    "Socket Count:",
+    io.sockets.adapter.rooms.get(roomId)?.size
+);
                     io.to(roomId).emit(
                         "room_started",
                         {
