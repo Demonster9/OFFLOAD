@@ -2,7 +2,7 @@ import api from "./api";
 
 const getProfile = async () => {
 
-    const response = await api.get("/profile");
+    const response = await api.get("/auth/profile");
 
     return response.data;
 
@@ -11,7 +11,7 @@ const getProfile = async () => {
 const updateProfile = async (data) => {
 
     const response = await api.put(
-        "/profile",
+        "/auth/profile",
         data
     );
 
