@@ -16,14 +16,16 @@ class ProfileService {
 
     async updateProfile(userId, profileData) {
 
-        const allowedFields = [
-            "displayName",
-            "bio",
-            "portfolio",
-            "location",
-            "skills",
-            "interests"
-        ];
+  const allowedFields = [
+    "handle",
+    "level",
+    "stack",
+    "bio",
+    "location",
+    "githubUsername",
+    "portfolio",
+    "skills"
+];
 
         const updates = {};
 

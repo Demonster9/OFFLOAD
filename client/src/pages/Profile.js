@@ -59,7 +59,7 @@ const handleSave = async () => {
         .filter(Boolean)
 
 });
-        updateUser(response.user);
+        updateUser(response.profile);
 
         setEditing(false);
 
