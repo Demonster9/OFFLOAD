@@ -2,7 +2,7 @@ import api from "./api";
 
 const getProfile = async () => {
 
-    const response = await api.get("/auth/profile");
+    const response = await api.get("/profile");
 
     return response.data;
 
@@ -10,10 +10,10 @@ const getProfile = async () => {
 
 const updateProfile = async (data) => {
 
-    const response = await api.put(
-        "/auth/profile",
-        data
-    );
+    const response = await api.patch(
+    "/profile",
+    data
+);
 
     return response.data;
 
